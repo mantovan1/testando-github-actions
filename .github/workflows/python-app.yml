@@ -1,25 +1,17 @@
-name: Run Tests
+name: Push Event Workflow
 
-on: [push, pull_request]
+on: push 
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  unit-testing:
+    runs-on: ubuntu-latest 
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Se você tiver requisitos específicos
-
-    - name: Run tests
-      run: |
-        python -m unittest discover
+    - name : Checkout code
+      uses : actions/checkout@v2
+      
+    - name : Install Packages 
+      run : pip install pytest
+      
+    - name : Run tests 
+      run : pytest test.py
